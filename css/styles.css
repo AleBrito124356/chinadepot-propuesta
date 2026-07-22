@@ -207,7 +207,12 @@ main, footer, .topbar, .cinta-top, .chips { position: relative; z-index: 1; }
   padding: 1rem clamp(1rem, 3.5vw, 2.6rem);
   background: var(--rojo);
   border-bottom: var(--borde-grueso);
-  position: sticky; top: 63px; z-index: 110;
+  /* Se pega EXACTAMENTE bajo el header: su altura real la mide JS (--topbar-h). */
+  position: sticky; top: calc(var(--topbar-h, 64px) - 2px); z-index: 110;
+}
+/* En móvil la cinta no se pega: ocupaba media pantalla y quedaba tapada. */
+@media (max-width: 720px) {
+  .chips { position: static; }
 }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
