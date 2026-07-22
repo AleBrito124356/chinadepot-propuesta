@@ -81,12 +81,19 @@ main, footer, .topbar, .cinta-top, .chips { position: relative; z-index: 1; }
 .cinta-track span { padding-right: .5em; }
 @keyframes rueda-cinta { from { transform: translateX(0) } to { transform: translateX(-50%) } }
 
-/* ═══════════ HEADER ═══════════ */
+/* ═══════════ HEADER + CINTA: un solo bloque pegado ═══════════
+   Header y cinta viven dentro de .pega — se pegan JUNTOS como unidad,
+   así es imposible que se desalineen o se corten entre sí. */
+.pega { position: sticky; top: 0; z-index: 120; }
+/* En pantallas chicas nada persigue el scroll: la cinta queda en su
+   lugar (deslizable a los lados) y el WhatsApp flotante hace de CTA. */
+@media (max-width: 920px) {
+  .pega { position: static; }
+}
 .topbar {
-  position: sticky; top: 0; z-index: 120;
   display: flex; align-items: center; gap: clamp(.8rem, 2.5vw, 2rem);
   padding: .7rem clamp(1rem, 3.5vw, 2.6rem);
-  background: rgba(251, 245, 234, .94);
+  background: rgba(251, 245, 234, .96);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: var(--borde-grueso);
@@ -204,15 +211,9 @@ main, footer, .topbar, .cinta-top, .chips { position: relative; z-index: 1; }
 /* ═══════════ CHIPS DE CATEGORÍAS ═══════════ */
 .chips {
   display: flex; gap: .55rem; overflow-x: auto; scrollbar-width: none;
-  padding: 1rem clamp(1rem, 3.5vw, 2.6rem);
+  padding: .85rem clamp(1rem, 3.5vw, 2.6rem);
   background: var(--rojo);
   border-bottom: var(--borde-grueso);
-  /* Se pega EXACTAMENTE bajo el header: su altura real la mide JS (--topbar-h). */
-  position: sticky; top: calc(var(--topbar-h, 64px) - 2px); z-index: 110;
-}
-/* En móvil la cinta no se pega: ocupaba media pantalla y quedaba tapada. */
-@media (max-width: 720px) {
-  .chips { position: static; }
 }
 .chips::-webkit-scrollbar { display: none; }
 .chip {

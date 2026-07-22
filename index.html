@@ -10,7 +10,7 @@
 <meta property="og:image" content="assets/img/fachada-remaster.jpg">
 <meta name="theme-color" content="#D9231F">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23D9231F'/><path d='M25 32h8l6 26h28l6-20H37' fill='none' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/><circle cx='44' cy='70' r='5' fill='white'/><circle cx='63' cy='70' r='5' fill='white'/></svg>">
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=3">
 </head>
 <body>
 
@@ -21,7 +21,8 @@
   </div>
 </div>
 
-<!-- ══════════ HEADER ══════════ -->
+<!-- ══════════ HEADER + CINTA (un solo bloque pegado) ══════════ -->
+<div class="pega">
 <header class="topbar" id="topbar">
   <a class="marca" href="#inicio" aria-label="China Depot — inicio">
     <!-- Logo redibujado en vector, fiel al original -->
@@ -56,6 +57,26 @@
     <span>Pedir por WhatsApp</span>
   </a>
 </header>
+
+<nav class="chips" id="categorias" aria-label="Categorías de productos">
+  <button class="chip activo" data-cat="todos">Todo</button>
+  <button class="chip" data-cat="hogar">Hogar</button>
+  <button class="chip" data-cat="cocina">Cocina</button>
+  <button class="chip" data-cat="ferreteria">Ferretería</button>
+  <button class="chip" data-cat="escolar">Escolar</button>
+  <button class="chip" data-cat="fiesta">Fiesta</button>
+  <button class="chip" data-cat="mascota">Mascota</button>
+  <button class="chip" data-cat="deporte">Deporte</button>
+  <button class="chip" data-cat="pesca">Pesca</button>
+  <button class="chip" data-cat="auto">Auto</button>
+  <button class="chip" data-cat="juguete">Juguete</button>
+  <button class="chip" data-cat="belleza">Belleza</button>
+  <button class="chip" data-cat="electronica">Electrónica</button>
+  <button class="chip" data-cat="jardin">Jardín</button>
+  <button class="chip" data-cat="decoracion">Decoración</button>
+  <button class="chip" data-cat="navidad">Navidad</button>
+</nav>
+</div>
 
 <main id="inicio">
 
@@ -100,26 +121,6 @@
     </svg>
   </div>
 </section>
-
-<!-- ══════════ CATEGORÍAS (CHIPS FILTRO) ══════════ -->
-<nav class="chips" id="categorias" aria-label="Categorías de productos">
-  <button class="chip activo" data-cat="todos">Todo</button>
-  <button class="chip" data-cat="hogar">Hogar</button>
-  <button class="chip" data-cat="cocina">Cocina</button>
-  <button class="chip" data-cat="ferreteria">Ferretería</button>
-  <button class="chip" data-cat="escolar">Escolar</button>
-  <button class="chip" data-cat="fiesta">Fiesta</button>
-  <button class="chip" data-cat="mascota">Mascota</button>
-  <button class="chip" data-cat="deporte">Deporte</button>
-  <button class="chip" data-cat="pesca">Pesca</button>
-  <button class="chip" data-cat="auto">Auto</button>
-  <button class="chip" data-cat="juguete">Juguete</button>
-  <button class="chip" data-cat="belleza">Belleza</button>
-  <button class="chip" data-cat="electronica">Electrónica</button>
-  <button class="chip" data-cat="jardin">Jardín</button>
-  <button class="chip" data-cat="decoracion">Decoración</button>
-  <button class="chip" data-cat="navidad">Navidad</button>
-</nav>
 
 <!-- ══════════ NOVEDADES ══════════ -->
 <section class="seccion" id="novedades">

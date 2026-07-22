@@ -19,16 +19,6 @@
 
   var estado = { cat: 'todos', texto: '' };
 
-  /* ── Altura real del header → la cinta de chips se pega justo debajo ── */
-  var topbar = document.getElementById('topbar');
-  function mideTopbar() {
-    document.documentElement.style.setProperty('--topbar-h', topbar.offsetHeight + 'px');
-  }
-  mideTopbar();
-  window.addEventListener('resize', mideTopbar);
-  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(mideTopbar); }
-  window.addEventListener('load', mideTopbar);
-
   /* ─────────────── Normalización (sin acentos) ─────────────── */
   function plano(s) {
     return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
