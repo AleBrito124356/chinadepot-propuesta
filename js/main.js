@@ -24,19 +24,39 @@
     return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
 
+  /* Índice de búsqueda por producto: nombre visible + sinónimos + categoría.
+     (No el textContent completo: "pedir precio" o "nuevo" matcheaban todo.) */
+  productos.forEach(function (p) {
+    p._indice = plano(
+      p.getAttribute('data-nombre') + ' ' +
+      p.querySelector('.prod-nombre').textContent + ' ' +
+      p.querySelector('.prod-cat').textContent + ' ' +
+      p.getAttribute('data-cat')
+    );
+  });
+
+  var cuenta = document.getElementById('cuenta');
+
   /* ─────────────────────── Filtrado ────────────────────────── */
   function aplicaFiltro() {
     var visibles = 0;
+    var palabras = estado.texto.split(/\s+/).filter(Boolean);
     productos.forEach(function (p) {
       var cats = plano(p.getAttribute('data-cat'));
-      var nombre = plano(p.getAttribute('data-nombre') + ' ' + p.textContent);
       var pasaCat = estado.cat === 'todos' || cats.indexOf(estado.cat) !== -1;
-      var pasaTexto = !estado.texto || nombre.indexOf(estado.texto) !== -1;
+      var pasaTexto = palabras.every(function (w) { return p._indice.indexOf(w) !== -1; });
       var visible = pasaCat && pasaTexto;
       p.classList.toggle('oculto', !visible);
       if (visible) visibles++;
     });
     sinResultados.hidden = visibles !== 0;
+    if (cuenta) {
+      if (estado.texto || estado.cat !== 'todos') {
+        cuenta.textContent = visibles + (visibles === 1 ? ' producto' : ' productos');
+      } else {
+        cuenta.textContent = '';
+      }
+    }
   }
 
   function marcaChip(cat) {
@@ -63,9 +83,30 @@
   });
 
   if (busca) {
+    var yaScrolleo = false;
     busca.addEventListener('input', function () {
       estado.texto = plano(busca.value.trim());
+      /* Buscar es global: suelta el filtro de categoría para no esconder resultados */
+      if (estado.texto && estado.cat !== 'todos') {
+        estado.cat = 'todos';
+        marcaChip('todos');
+      }
       aplicaFiltro();
+      /* La primera vez que escribes, baja al grid para que VEAS los resultados */
+      if (estado.texto && !yaScrolleo) {
+        var grid = document.getElementById('novedades');
+        if (grid.getBoundingClientRect().top > window.innerHeight * .6) {
+          grid.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+        yaScrolleo = true;
+      }
+      if (!estado.texto) { yaScrolleo = false; }
+    });
+    busca.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('novedades').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
     });
   }
 
