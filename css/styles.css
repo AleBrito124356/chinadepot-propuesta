@@ -397,6 +397,32 @@ main, footer, .topbar, .cinta-top, .chips { position: relative; z-index: 1; }
 .pie-demo b { color: var(--dorado); }
 @media (max-width: 760px) { .pie-grid { grid-template-columns: 1fr; } }
 
+/* ═══════════ FRANJA PROMO ═══════════ */
+.promo {
+  position: relative; overflow: hidden;
+  border-top: var(--borde-grueso); border-bottom: var(--borde-grueso);
+  min-height: 62svh;
+  display: grid; place-items: center;
+}
+.promo > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.promo-velo {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 80% at 50% 50%, transparent 40%, rgba(32, 23, 20, .38) 100%),
+    linear-gradient(180deg, rgba(32, 23, 20, .3) 0%, transparent 25%, transparent 75%, rgba(32, 23, 20, .3) 100%);
+}
+.promo-inner { position: relative; text-align: center; padding: clamp(3rem, 8vh, 5rem) 1.5rem; display: grid; justify-items: center; gap: 1.1rem; }
+.promo-titulo {
+  font-family: var(--f-display);
+  font-size: clamp(2.4rem, 6.8vw, 5rem);
+  line-height: .98; text-transform: uppercase; color: var(--blanco);
+  text-shadow: 4px 4px 0 var(--rojo), 8px 8px 24px rgba(32, 23, 20, .55);
+}
+.promo-sub {
+  color: var(--blanco); font-weight: 600; font-size: clamp(1rem, 1.5vw, 1.2rem);
+  text-shadow: 0 2px 12px rgba(32, 23, 20, .85); max-width: 40ch;
+}
+
 /* ═══════════ POR MAYOR ═══════════ */
 .mayoreo { max-width: none; width: 100%; padding: 0; }
 .mayoreo-marco {
